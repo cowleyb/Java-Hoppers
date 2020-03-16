@@ -16,16 +16,17 @@ public class Board
 
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,5));
-        frame.add(panel);
+      
 
         squares = new Square[5][5];
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
                 squares[i][j]=new Square(i,j,0);
+                panel.add(squares[i][j].getButton());
             }
         }
 
-
+        frame.add(panel);
 
         frame.setVisible(true);
     }

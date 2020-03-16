@@ -6,7 +6,7 @@ public class Square
     private int state;
     private int x;
     private int y;
-    private JPanel panel;
+   // private JPanel panel;
     private JButton button;
 
     public Square(int px,int py,int pstate)
@@ -14,11 +14,11 @@ public class Square
         state = pstate;
         x = px;
         y = py;
-        panel = new JPanel();
+       // panel = new JPanel();
         button = new JButton();
-
-        panel.add(button);
-        this.update("Water.png");
+ this.update("Water.png");
+      //  panel.add(button);
+       
     }
 
     public int getX()
@@ -47,7 +47,10 @@ public class Square
         button.setIcon(i);
     }
 
-
+    public JButton getButton()
+    {
+        return button;
+    }
 
 
 
