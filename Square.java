@@ -1,13 +1,22 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Square 
+public class Square
 {
     private int state;
     private int x;
     private int y;
    // private JPanel panel;
     private JButton button;
+
+    public Square()
+    {
+        state = -1;
+        x = -1;
+        y = -1;
+        button = new JButton();
+    }
 
     public Square(int px,int py,int pstate)
     {
@@ -17,8 +26,6 @@ public class Square
        
         button = new JButton();
         this.update("Water.png");
-     
-       
     }
 
     public int getX()
@@ -51,6 +58,7 @@ public class Square
     {
         return button;
     }
+
 
 
 

@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Board
+public class Board 
 {
     private JFrame frame;
     private JPanel mainPanel;
@@ -9,24 +10,9 @@ public class Board
     private JPanel levelPanel;
     private Options options;
     private Squares squares;
-    //private Square[][] squares;
 
     public Board()
     {
-        /*
-        gamePanel = new JPanel();
-        gamePanel.setLayout(new GridLayout(5,5));
-
-        squares = new Square[5][5];
-        for (int i=0; i<5; i++) {
-            for (int j=0; j< 5;j++){
-                squares[i][j]=new Square(i,j,0);
-                gamePanel.add(squares[i][j].getButton());
-            }
-        }
-     */
-
-
         frame = new JFrame();
         frame.setTitle("Hoppers");
         frame.setSize(700,700);

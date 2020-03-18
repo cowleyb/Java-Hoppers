@@ -20,12 +20,14 @@ public class Options
         previousLevel = new JButton("Previous Level");
         open = new JButton("Open Level");
         level = new JTextField();
+        level.setColumns(5);
 
         panel.add(reset);
         panel.add(nextLevel);
         panel.add(previousLevel);
-        panel.add(open);
         panel.add(level);
+        panel.add(open);
+        
     }
 
     public JButton getResetButton()
