@@ -14,10 +14,10 @@ public class Square
         state = pstate;
         x = px;
         y = py;
-       // panel = new JPanel();
+       
         button = new JButton();
- this.update("Water.png");
-      //  panel.add(button);
+        this.update("Water.png");
+     
        
     }
 
