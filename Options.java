@@ -16,6 +16,7 @@ public class Options
     private JButton nextLevel;
     private JButton previousLevel;
     private JButton open;
+    private JLabel levelNow;
     private JTextField level;
     private int currentLevel;
     private String[] levels;
@@ -34,7 +35,9 @@ public class Options
         open = new JButton("Open Level");
         level = new JTextField();
         level.setColumns(5);
+        levelNow = new JLabel();
 
+        panel.add(levelNow);
         panel.add(reset);
         panel.add(nextLevel);
         panel.add(previousLevel);
@@ -92,6 +95,16 @@ public class Options
     public String getCurrentLevel()
     {
         return levels[currentLevel];
+    }
+
+    public void updateLevelButton()
+    {
+        levelNow.setText(Integer.toString(currentLevel));
+    }
+
+    public int getLevel()
+    {
+        return currentLevel;
     }
 
   

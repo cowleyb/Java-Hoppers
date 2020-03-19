@@ -49,37 +49,56 @@ public class Board implements ActionListener
 
     private void reset()
     {
-
+        squares.changeLevel(options.getCurrentLevel());
     }
+    private void nextLevel()
+    {
+        options.setLevel(options.getLevel() + 1);
+        squares.changeLevel(options.getCurrentLevel());
+        options.updateLevelButton();
+    }
+    private void previousLevel()
+    {
+        options.setLevel(options.getLevel() - 1);
+        squares.changeLevel(options.getCurrentLevel());
+        options.updateLevelButton();
+    }
+
+    private void openLevel(String pLevel)
+    {
+        options.setLevel(Integer.parseInt(pLevel));
+        squares.changeLevel(options.getCurrentLevel());
+        options.updateLevelButton();
+    } 
 
     public void actionPerformed(ActionEvent e)
     {
         if (e.getSource() == options.getResetButton()){
-            
+            reset();
         } else if (e.getSource() == options.getNextLevelButton()) {
-            
+            nextLevel();
         } else if (e.getSource() == options.getPreviousLevelButton()) {
-            
+            previousLevel();
         }else if (e.getSource() == options.getOpenButton()) {
-            
+            openLevel(options.getOpenButton().getText());
         } else {
-                for (int i=0; i<25; i++) {
-                        if (e.getSource() == squares.getSquare(i).getButton())
-                            if (currentNext == 0){
-                                if (squares.getSquare(i).validStarter() == true) {
-                                    currentSquare = i;
-                                    currentNext = 1;}
-                            } else {
-                                if (squares.validNext(currentSquare, i) == true) {
-                                    squares.getSquare(currentSquare).moveTo(squares.getSquare(i));
-                                    currentNext = 0;
-                                }
-                            }
-                    
-                }  
-            }
+            for (int i=0; i<25; i++) {
+                if (e.getSource() == squares.getSquare(i).getButton())
+                    if (currentNext == 0){
+                        if (squares.getSquare(i).validStarter() == true) {
+                            currentSquare = i;
+                            currentNext = 1;
+                        }
+                    } else {
+                        if (squares.validNext(currentSquare, i) == true) {
+                            squares.getSquare(currentSquare).moveTo(squares.getSquare(i));
+                            currentNext = 0;
+                        }
+                    }
+            } 
         }
     }
+
 
 }
 
