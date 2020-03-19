@@ -100,7 +100,7 @@ public class Options
 
     public void updateLevelButton()
     {
-        levelNow.setText(Integer.toString(currentLevel));
+        levelNow.setText("Level " + Integer.toString(currentLevel));
     }
 
     public int getLevel()

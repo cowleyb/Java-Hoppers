@@ -112,4 +112,22 @@ public class Square
             return false;
         }
     }
+
+    public boolean validNext()
+    {
+        if (state == '1'){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public boolean validMid()
+    {
+        if (state == '2'){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

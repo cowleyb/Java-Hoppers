@@ -12,9 +12,11 @@ public class Board implements ActionListener
     private Squares squares;
     private int currentSquare[];
     private int nextSquare[];
+    private int currentNext;
 
     public Board()
     { 
+        currentNext = 0;
         currentSquare = new int[]{0,0};
         nextSquare = new int[]{0,0};
         frame = new JFrame();
@@ -38,26 +40,34 @@ public class Board implements ActionListener
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
 
+        
 
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
             squares.getSquare(new int[]{i,j}).getButton().addActionListener(this);
             }
         }
+
         options.getNextLevelButton().addActionListener(this);
         options.getPreviousLevelButton().addActionListener(this);
         options.getResetButton().addActionListener(this);
         options.getOpenButton().addActionListener(this);
         options.openFile("Levels.txt");
+
+        squares.changeLevel(options.getCurrentLevel());
+        options.updateLevelButton();
+    
     }
 
     private void reset()
     {
+        currentNext = 0;
         squares.changeLevel(options.getCurrentLevel());
     }
 
     private void nextLevel()
     {
+        currentNext = 0;
         options.setLevel(options.getLevel() + 1);
         squares.changeLevel(options.getCurrentLevel());
         options.updateLevelButton();
@@ -65,6 +75,7 @@ public class Board implements ActionListener
 
     private void previousLevel()
     {
+        currentNext = 0;
         options.setLevel(options.getLevel() - 1);
         squares.changeLevel(options.getCurrentLevel());
         options.updateLevelButton();
@@ -72,6 +83,7 @@ public class Board implements ActionListener
 
     private void openLevel(String pLevel)
     {
+        currentNext = 0;
         options.setLevel(Integer.parseInt(pLevel));
         squares.changeLevel(options.getCurrentLevel());
         options.updateLevelButton();
@@ -82,22 +94,33 @@ public class Board implements ActionListener
             currentSquare[0] = i;
             currentSquare[1] = j;
             squares.getSquare(currentSquare).setSelected(true);
+            squares.getSquare(currentSquare).update();
+            currentNext = 1;
         }
     }
 
     private void selectNext(int i,int j)
     {
-        if (squares.getSquare(new int[]{i,j}).validStarter()){
-            nextSquare[0] = i;
-            nextSquare[1] = j;
-            squares.getSquare(nextSquare).setSelected(true);
+        nextSquare[0] = i;
+        nextSquare[1] = j;
+        if (squares.getSquare(nextSquare).validNext()){
+            move();
+        } else if (currentSquare[0] == nextSquare[0] && currentSquare[1] == nextSquare[1] ){
+            currentNext = 0;
+            squares.getSquare(currentSquare).setSelected(false);
+            squares.getSquare(currentSquare).update();
         }
     }
 
     private void move()
     {
         int[] midSquare = squares.getMidSquare(currentSquare, nextSquare);
-        squares.getSquare(currentSquare).moveTo( squares.getSquare(nextSquare),  squares.getSquare(midSquare));
+        if (squares.getSquare(midSquare).validMid()){
+            if (squares.validMove(currentSquare,nextSquare,midSquare)){
+                squares.getSquare(currentSquare).moveTo( squares.getSquare(nextSquare), squares.getSquare(midSquare));
+                currentNext = 0;
+            }
+        }
     }
 
     public void actionPerformed(ActionEvent e)
@@ -114,11 +137,10 @@ public class Board implements ActionListener
             for (int i=0; i<5; i++) {
                 for (int j=0; j< 5;j++){
                     if (e.getSource() == squares.getSquare(new int[]{i,j}).getButton())
-                        if (squares.getSquare(currentSquare).isSelected()){
-                            selectNext(i,j);
-                            move();
+                        if (currentNext == 0){
+                            selectCurrent(i, j);;
                         } else { 
-                            selectCurrent(i,j);
+                            selectNext(i,j);
                         } 
                         
                     }
