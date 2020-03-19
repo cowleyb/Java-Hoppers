@@ -1,4 +1,6 @@
 import javax.swing.*;
+
+
 import java.awt.*;
 import java.awt.event.*;
 
@@ -87,15 +89,14 @@ public class Square
         state = 1;
         update();
         pSquare.update();
-      
-
     }
 
-
-
-
-
-
-
-
+    public boolean validStarter()
+    {
+        if (state == 2 || state == 3){
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
