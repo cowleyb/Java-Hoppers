@@ -1,34 +1,32 @@
 import javax.swing.*;
 
 
-import java.awt.*;
-import java.awt.event.*;
+//import java.awt.*;
+//import java.awt.event.*;
 
 public class Square
 {
     private char state;
-    private int x;
-    private int y;
+    private boolean selected;
    // private JPanel panel;
     private JButton button;
 
     public Square()
     {
         state = '0';
-        x = -1;
-        y = -1;
+        selected = false;
         button = new JButton();
     }
 
-    public Square(int px,int py,char pstate)
+    public Square(char pstate)
     {
         state = pstate;
-        x = px;
-        y = py;
-       
+        //x = px;
+        //y = py;
         button = new JButton();
         update();
     }
+    /*
 
     public int getX()
     {
@@ -39,7 +37,7 @@ public class Square
     {
         return y;
     }
-
+*/
     public int getState()
     {
         return state;
@@ -48,6 +46,17 @@ public class Square
     public void setState(char pstate)
     {
         state = pstate;
+        update();
+    }
+
+    public boolean isSelected()
+    {
+        return selected;
+    }
+
+    public void setSelected(boolean pSelected)
+    {
+        selected = pSelected;
     }
     
     public void update()
@@ -56,19 +65,19 @@ public class Square
         if (state == '1'){
             ImageIcon i = new ImageIcon("LilyPad.png");
             button.setIcon(i);
-        }else if (state == '2'){
+        }else if (state == '2'&& selected == false ){
             ImageIcon i = new ImageIcon("GreenFrog.png");
             button.setIcon(i);
         }
-        else if (state == '3'){
+        else if (state == '3' && selected == false){
             ImageIcon i = new ImageIcon("RedFrog.png");
             button.setIcon(i);
         }
-        else if (state == '4'){
+        else if (state == '2' && selected == true){
             ImageIcon i = new ImageIcon("GreenFrog2.png");
             button.setIcon(i);
         }
-        else if (state == '5'){
+        else if (state == '3' && selected == true){
             ImageIcon i = new ImageIcon("RedFrog2.png");
             button.setIcon(i);
         } else {
@@ -82,13 +91,17 @@ public class Square
         return button;
     }
 
-    public void moveTo(Square pSquare)
+    public void moveTo(Square pSquare, Square pMiddleSquare)
     {   
         //this.state = 1;
         pSquare.setState(state);
         state = '1';
+        selected = false;
+        pMiddleSquare.setState('1');
         update();
         pSquare.update();
+        pMiddleSquare.update();
+
     }
 
     public boolean validStarter()

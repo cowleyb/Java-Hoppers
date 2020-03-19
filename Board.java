@@ -10,14 +10,16 @@ public class Board implements ActionListener
     private JPanel levelPanel;
     private Options options;
     private Squares squares;
-    private int currentNext;
-    private int currentSquare;
+    private int currentSquare[];
+    private int nextSquare[];
 
     public Board()
-    {
+    { 
+        currentSquare = new int[]{0,0};
+        nextSquare = new int[]{0,0};
         frame = new JFrame();
         frame.setTitle("Hoppers");
-        frame.setSize(700,700);
+        frame.setSize(900,900);
 
         squares = new Squares();
         gamePanel = new JPanel();
@@ -37,9 +39,11 @@ public class Board implements ActionListener
         frame.setVisible(true);
 
 
-        //for (int i = 0; i <25; i++){
-           // squares.getSquare(i).getButton().addActionListener(this);
-        //}
+        for (int i=0; i<5; i++) {
+            for (int j=0; j< 5;j++){
+            squares.getSquare(new int[]{i,j}).getButton().addActionListener(this);
+            }
+        }
         options.getNextLevelButton().addActionListener(this);
         options.getPreviousLevelButton().addActionListener(this);
         options.getResetButton().addActionListener(this);
@@ -72,10 +76,32 @@ public class Board implements ActionListener
         squares.changeLevel(options.getCurrentLevel());
         options.updateLevelButton();
     } 
+    private void selectCurrent(int i,int j)
+    {
+        if (squares.getSquare(new int[]{i,j}).validStarter()){
+            currentSquare[0] = i;
+            currentSquare[1] = j;
+            squares.getSquare(currentSquare).setSelected(true);
+        }
+    }
+
+    private void selectNext(int i,int j)
+    {
+        if (squares.getSquare(new int[]{i,j}).validStarter()){
+            nextSquare[0] = i;
+            nextSquare[1] = j;
+            squares.getSquare(nextSquare).setSelected(true);
+        }
+    }
+
+    private void move()
+    {
+        int[] midSquare = squares.getMidSquare(currentSquare, nextSquare);
+        squares.getSquare(currentSquare).moveTo( squares.getSquare(nextSquare),  squares.getSquare(midSquare));
+    }
 
     public void actionPerformed(ActionEvent e)
     {
-        System.out.println("hhhhhhhhhhhhhhh");
         if (e.getSource() == options.getResetButton()){
             reset();
         } else if (e.getSource() == options.getNextLevelButton()) {
@@ -85,18 +111,16 @@ public class Board implements ActionListener
         }else if (e.getSource() == options.getOpenButton()) {
             openLevel(options.getOpenButton().getText());
         } else {
-            for (int i=0; i<25; i++) {
-                if (e.getSource() == squares.getSquare(i).getButton())
-                    if (currentNext == 0){
-                        if (squares.getSquare(i).validStarter() == true) {
-                            currentSquare = i;
-                            currentNext = 1;
-                        }
-                    } else {
-                        if (squares.validNext(currentSquare, i) == true) {
-                            squares.getSquare(currentSquare).moveTo(squares.getSquare(i));
-                            currentNext = 0;
-                        }
+            for (int i=0; i<5; i++) {
+                for (int j=0; j< 5;j++){
+                    if (e.getSource() == squares.getSquare(new int[]{i,j}).getButton())
+                        if (squares.getSquare(currentSquare).isSelected()){
+                            selectNext(i,j);
+                            move();
+                        } else { 
+                            selectCurrent(i,j);
+                        } 
+                        
                     }
             } 
         }

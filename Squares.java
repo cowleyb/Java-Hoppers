@@ -4,7 +4,7 @@ import java.awt.event.*;
 
 public class Squares  
 {
-    private Square[] squares;
+    private Square[][] squares;
     private JPanel panel;
     //private Square currentSquare;
     //private Square nextSquare;
@@ -18,7 +18,8 @@ public class Squares
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,5));
 
-        squares = new Square[25];
+        squares = new Square[5][5];
+        /*
         int count = -1;
         for (int i=0; i<25; i++) {
             if (i % 5 == 0){
@@ -27,15 +28,15 @@ public class Squares
             squares[i] = new Square(count, i % 5, '0');
             panel.add(squares[i].getButton());
         }
-        /*
+        */
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
-                squares[i+j]=new Square(i,j,'0');
-                panel.add(squares[i+j].getButton());
+                squares[i][j]=new Square('0');
+                panel.add(squares[i][j].getButton());
                 //squares[i+j].getButton().addActionListener(this);
             }
         }
-        */
+        
        
     }
 
@@ -44,19 +45,24 @@ public class Squares
         return panel;
     }
 
-    public Square getSquare(int i)
+    public Square getSquare(int pSqaure[])
     {
-        return squares[i];
+        return squares[pSqaure[0]][pSqaure[1]];
     }
 
-    public boolean validNext(int pCurrentSquare, int pNextSquare)
+    public int[] getMidSquare(int pCurrentSquare[], int pNextSquare[])
     {
-        int xDiff = Math.abs(squares[pCurrentSquare].getX() - squares[pNextSquare].getX());
-        int yDiff = Math.abs(squares[pCurrentSquare].getY() - squares[pNextSquare].getY());
-        int middleSquare = Math.abs(pCurrentSquare - pNextSquare)/2 + pCurrentSquare; 
+        //int midSquare[] = new int[]
+        return new int[]{pCurrentSquare[0] + pNextSquare[0]/2 , pCurrentSquare[1] + pNextSquare[1] /2 };
+    }
+/*
+    public boolean validNext(int pCurrentSquare[], int pNextSquare[], int pMiddleSquare[])
+    {
+        int xDiff = Math.abs(pCurrentSquare[0] -pNextSquare[0]);
+        int yDiff = Math.abs(pCurrentSquare[1] -pNextSquare[1]);
         
-        if (squares[pNextSquare].getState() == 1){
-            if (squares[middleSquare].getState() == 2 || squares[middleSquare].getState() == 3){
+        if (squares[pNextSquare[0]][pNextSquare[1]].getState() == '1'){
+            if (squares[pMiddleSquare[0]][pMiddleSquare[1]].validStarter()){
                 if (xDiff == 0 && yDiff == 4){
                     return true;
                 } else if (xDiff == 4 && yDiff == 0){
@@ -68,14 +74,17 @@ public class Squares
         } 
         return false;
     }
-
+*/
 
     public void changeLevel(String level)
     {
-        for (int i = 0; i < 25; i++){
-            squares[i].setState(level.charAt(i));
-            squares[i].update();
-            System.out.println(i);
+        int k = 0;
+        for (int i=0; i<5; i++) {
+            for (int j=0; j< 5;j++){
+                squares[i][j].setState(level.charAt(k));
+                squares[i][j].update();
+                k++;
+            }
         }
         //System.out.println("hehasfuihsifh");
     }
