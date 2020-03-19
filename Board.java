@@ -21,7 +21,7 @@ public class Board implements ActionListener
         nextSquare = new int[]{0,0};
         frame = new JFrame();
         frame.setTitle("Hoppers");
-        frame.setSize(900,900);
+        frame.setSize(800,800);
 
         squares = new Squares();
         gamePanel = new JPanel();
@@ -61,12 +61,14 @@ public class Board implements ActionListener
 
     private void reset()
     {
+        options.inTheProcessOfWinning();
         currentNext = 0;
         squares.changeLevel(options.getCurrentLevel());
     }
 
     private void nextLevel()
     {
+        options.inTheProcessOfWinning();
         currentNext = 0;
         options.setLevel(options.getLevel() + 1);
         squares.changeLevel(options.getCurrentLevel());
@@ -75,6 +77,7 @@ public class Board implements ActionListener
 
     private void previousLevel()
     {
+        options.inTheProcessOfWinning();
         currentNext = 0;
         options.setLevel(options.getLevel() - 1);
         squares.changeLevel(options.getCurrentLevel());
@@ -83,6 +86,7 @@ public class Board implements ActionListener
 
     private void openLevel(String pLevel)
     {
+        options.inTheProcessOfWinning();
         currentNext = 0;
         options.setLevel(Integer.parseInt(pLevel));
         squares.changeLevel(options.getCurrentLevel());
@@ -119,7 +123,23 @@ public class Board implements ActionListener
             if (squares.validMove(currentSquare,nextSquare,midSquare)){
                 squares.getSquare(currentSquare).moveTo( squares.getSquare(nextSquare), squares.getSquare(midSquare));
                 currentNext = 0;
+                checkWinner();
             }
+        }
+    }
+
+    private void checkWinner()
+    {
+        int total = 0;
+        for (int i=0; i<5; i++) {
+            for (int j=0; j< 5;j++){
+               if (squares.getSquare(new int[]{i,j}).getState() == '2'){
+                   total++;
+               }
+            }
+        }
+        if (total == 0){
+            options.winner();
         }
     }
 

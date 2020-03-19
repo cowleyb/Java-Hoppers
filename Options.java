@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+//import jdk.internal.org.objectweb.asm.Label;
+
 //import sun.net.www.content.text.plain;
 
 import java.awt.*;
@@ -17,6 +19,8 @@ public class Options
     private JButton previousLevel;
     private JButton open;
     private JLabel levelNow;
+    private JLabel winner1;
+    private JLabel winner2;
     private JTextField level;
     private int currentLevel;
     private String[] levels;
@@ -36,13 +40,17 @@ public class Options
         level = new JTextField();
         level.setColumns(5);
         levelNow = new JLabel();
+        winner1 = new JLabel();
+        winner2 = new JLabel();
 
+        panel.add(winner1);
         panel.add(levelNow);
         panel.add(reset);
         panel.add(nextLevel);
         panel.add(previousLevel);
         panel.add(level);
         panel.add(open);
+        panel.add(winner2);
         
     }
 
@@ -106,6 +114,18 @@ public class Options
     public int getLevel()
     {
         return currentLevel;
+    }
+
+    public void winner()
+    {
+        winner1.setText("WINNER");
+        winner2.setText("WINNER");
+    }
+
+    public void inTheProcessOfWinning()
+    {
+        winner1.setText("");
+        winner2.setText("");
     }
 
   
