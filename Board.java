@@ -37,9 +37,9 @@ public class Board implements ActionListener
         frame.setVisible(true);
 
 
-        for (int i = 0; i <25; i++){
-            squares.getSquare(i).getButton().addActionListener(this);
-        }
+        //for (int i = 0; i <25; i++){
+           // squares.getSquare(i).getButton().addActionListener(this);
+        //}
         options.getNextLevelButton().addActionListener(this);
         options.getPreviousLevelButton().addActionListener(this);
         options.getResetButton().addActionListener(this);
@@ -51,12 +51,14 @@ public class Board implements ActionListener
     {
         squares.changeLevel(options.getCurrentLevel());
     }
+
     private void nextLevel()
     {
         options.setLevel(options.getLevel() + 1);
         squares.changeLevel(options.getCurrentLevel());
         options.updateLevelButton();
     }
+
     private void previousLevel()
     {
         options.setLevel(options.getLevel() - 1);
@@ -73,6 +75,7 @@ public class Board implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
+        System.out.println("hhhhhhhhhhhhhhh");
         if (e.getSource() == options.getResetButton()){
             reset();
         } else if (e.getSource() == options.getNextLevelButton()) {

@@ -19,6 +19,15 @@ public class Squares
         panel.setLayout(new GridLayout(5,5));
 
         squares = new Square[25];
+        int count = -1;
+        for (int i=0; i<25; i++) {
+            if (i % 5 == 0){
+                count++;
+            }
+            squares[i] = new Square(count, i % 5, '0');
+            panel.add(squares[i].getButton());
+        }
+        /*
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
                 squares[i+j]=new Square(i,j,'0');
@@ -26,6 +35,7 @@ public class Squares
                 //squares[i+j].getButton().addActionListener(this);
             }
         }
+        */
        
     }
 
@@ -65,7 +75,9 @@ public class Squares
         for (int i = 0; i < 25; i++){
             squares[i].setState(level.charAt(i));
             squares[i].update();
+            System.out.println(i);
         }
+        //System.out.println("hehasfuihsifh");
     }
 
 

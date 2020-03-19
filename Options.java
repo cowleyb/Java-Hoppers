@@ -1,6 +1,6 @@
 import javax.swing.*;
 
-import sun.net.www.content.text.plain;
+//import sun.net.www.content.text.plain;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -54,6 +54,7 @@ public class Options
             Scanner reader = new Scanner(fileObject);
             while (reader.hasNextLine()){
                 levels[line] = reader.nextLine();
+                line++;
             }
             reader.close();
         } catch (FileNotFoundException e){}

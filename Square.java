@@ -45,7 +45,7 @@ public class Square
         return state;
     }
 
-    public void setState(int pstate)
+    public void setState(char pstate)
     {
         state = pstate;
     }
