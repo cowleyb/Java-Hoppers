@@ -44,6 +44,12 @@ public class Board implements ActionListener
         options.getPreviousLevelButton().addActionListener(this);
         options.getResetButton().addActionListener(this);
         options.getOpenButton().addActionListener(this);
+        options.openFile("Levels.txt");
+    }
+
+    private void reset()
+    {
+
     }
 
     public void actionPerformed(ActionEvent e)

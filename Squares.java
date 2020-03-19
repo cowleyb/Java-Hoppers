@@ -21,7 +21,7 @@ public class Squares
         squares = new Square[25];
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
-                squares[i+j]=new Square(i,j,0);
+                squares[i+j]=new Square(i,j,'0');
                 panel.add(squares[i+j].getButton());
                 //squares[i+j].getButton().addActionListener(this);
             }
@@ -62,7 +62,10 @@ public class Squares
 
     public void changeLevel(String level)
     {
-        
+        for (int i = 0; i < 25; i++){
+            squares[i].setState(level.charAt(i));
+            squares[i].update();
+        }
     }
 
 

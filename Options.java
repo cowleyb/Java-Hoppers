@@ -1,6 +1,13 @@
 import javax.swing.*;
+
+import sun.net.www.content.text.plain;
+
 import java.awt.*;
 import java.awt.event.*;
+
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
 
 public class Options 
 {
@@ -10,10 +17,15 @@ public class Options
     private JButton previousLevel;
     private JButton open;
     private JTextField level;
+    private int currentLevel;
+    private String[] levels;
+
 
 
     public Options()
     {
+        levels = new String[40];
+        currentLevel = 0;
         panel = new JPanel();
         panel.setLayout(new FlowLayout());
         reset = new JButton("Reset Level");
@@ -29,6 +41,19 @@ public class Options
         panel.add(level);
         panel.add(open);
         
+    }
+
+    public void openFile(String pFileName)
+    { 
+        int line = 0;
+        try {
+            File fileObject = new File(pFileName);
+            Scanner reader = new Scanner(fileObject);
+            while (reader.hasNextLine()){
+                levels[line] = reader.nextLine();
+            }
+            reader.close();
+        } catch (FileNotFoundException e){}
     }
 
     public JButton getResetButton()
@@ -53,6 +78,20 @@ public class Options
     public JPanel getPanel()
     {
         return  panel;
+    }
+
+    public void setLevel(int pLevel)
+    {
+        if (pLevel < 0 || pLevel > 40){
+            currentLevel = 0;
+        } else {
+            currentLevel = pLevel;  
+        }
+    }
+
+    public String getCurrentLevel()
+    {
+        return levels[currentLevel];
     }
 
   
