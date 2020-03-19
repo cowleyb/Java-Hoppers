@@ -84,11 +84,11 @@ public class Board implements ActionListener
         options.updateLevelButton();
     }
 
-    private void openLevel(String pLevel)
+    private void openLevel()
     {
         options.inTheProcessOfWinning();
         currentNext = 0;
-        options.setLevel(Integer.parseInt(pLevel));
+        options.setLevel(Integer.parseInt(options.getLevelText()) - 1);
         squares.changeLevel(options.getCurrentLevel());
         options.updateLevelButton();
     } 
@@ -152,7 +152,7 @@ public class Board implements ActionListener
         } else if (e.getSource() == options.getPreviousLevelButton()) {
             previousLevel();
         }else if (e.getSource() == options.getOpenButton()) {
-            openLevel(options.getOpenButton().getText());
+            openLevel();
         } else {
             for (int i=0; i<5; i++) {
                 for (int j=0; j< 5;j++){

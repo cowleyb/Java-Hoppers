@@ -1,5 +1,7 @@
 import javax.swing.*;
 
+//import sun.net.www.content.text.plain;
+
 //import jdk.internal.org.objectweb.asm.Label;
 
 //import sun.net.www.content.text.plain;
@@ -94,13 +96,16 @@ public class Options
 
     public void setLevel(int pLevel)
     {
-        if (pLevel < 0 || pLevel > 40){
-            currentLevel = 0;
-        } else {
-            currentLevel = pLevel;  
+        currentLevel = pLevel % 40;
+        if (currentLevel < 0){
+            currentLevel += 40;
         }
     }
 
+    public String getLevelText()
+    {
+        return level.getText();
+    }
     public String getCurrentLevel()
     {
         return levels[currentLevel];
@@ -108,7 +113,7 @@ public class Options
 
     public void updateLevelButton()
     {
-        levelNow.setText("Level " + Integer.toString(currentLevel));
+        levelNow.setText("Level " + Integer.toString(currentLevel + 1) );
     }
 
     public int getLevel()
