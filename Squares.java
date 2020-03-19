@@ -6,9 +6,15 @@ public class Squares implements ActionListener
 {
     private Square[][] squares;
     private JPanel panel;
+    private Square currentSquare;
+    private Square nextSquare;
+    private int currentNext;
 
     public Squares()
     {
+        currentSquare = new Square();
+        nextSquare = new Square();
+        currentNext = 0;
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,5));
 
@@ -30,16 +36,30 @@ public class Squares implements ActionListener
 
     public void actionPerformed(ActionEvent e)
     {
-        Square currentSquare = new Square();
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
                 if (e.getSource() == squares[i][j].getButton())
-                    currentSquare = squares[i][j];
+                    if (currentNext == 0){
+                        currentSquare = squares[i][j];
+                        currentNext = 1;
+                    }  else {
+                        nextSquare = squares[i][j];
+                        currentNext = 0;
+                    }
             }
         } 
-        System.out.println(currentSquare.getX());
-        System.out.println(currentSquare.getY());
-        System.out.println("h65h5h5h6");
+
+        if (currentNext == 0){
+            currentSquare.moveTo(nextSquare);
+        }
+    }
+
+    private boolean hasFrog()
+    {
+        if (currentSquare.getState() == 1 || currentSquare.getState() == 2)
+        {
+            return true;
+        }  else return false;
     }
 
 

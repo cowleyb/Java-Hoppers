@@ -25,7 +25,7 @@ public class Square
         y = py;
        
         button = new JButton();
-        this.update("Water.png");
+        update();
     }
 
     public int getX()
@@ -48,15 +48,47 @@ public class Square
         state = pstate;
     }
     
-    public void update(String icon)
+    public void update()
     {
-        ImageIcon i = new ImageIcon(icon);
-        button.setIcon(i);
+        
+        if (state == 1){
+            ImageIcon i = new ImageIcon("LilyPad.png");
+            button.setIcon(i);
+        }else if (state == 2){
+            ImageIcon i = new ImageIcon("GreenFrog.png");
+            button.setIcon(i);
+        }
+        else if (state == 3){
+            ImageIcon i = new ImageIcon("RedFrog.png");
+            button.setIcon(i);
+        }
+        else if (state == 4){
+            ImageIcon i = new ImageIcon("GreenFrog2.png");
+            button.setIcon(i);
+        }
+        else if (state == 5){
+            ImageIcon i = new ImageIcon("RedFrog2.png");
+            button.setIcon(i);
+        } else {
+            ImageIcon i = new ImageIcon("Water.png");
+            button.setIcon(i);
+        }
     }
 
     public JButton getButton()
     {
         return button;
+    }
+
+    public void moveTo(Square pSquare)
+    {   
+        //this.state = 1;
+        pSquare.setState(state);
+        state = 1;
+        update();
+        pSquare.update();
+      
+
     }
 
 

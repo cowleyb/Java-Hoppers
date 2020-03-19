@@ -1,7 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
 
-public class Options
+public class Options 
 {
     private JPanel panel;
     private JButton reset;
@@ -34,6 +35,10 @@ public class Options
     {
         return reset;
     }
+    public JButton getOpenButton()
+    {
+        return open;
+    }
 
     public JButton getNextLevelButton()
     {
@@ -49,6 +54,8 @@ public class Options
     {
         return  panel;
     }
+
+  
 
 
 } 
