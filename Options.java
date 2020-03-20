@@ -1,11 +1,4 @@
 import javax.swing.*;
-
-//import sun.net.www.content.text.plain;
-
-//import jdk.internal.org.objectweb.asm.Label;
-
-//import sun.net.www.content.text.plain;
-
 import java.awt.*;
 //import java.awt.event.*;
 
@@ -31,6 +24,7 @@ public class Options
 
     public Options()
     {
+        //Contructor
         levels = new String[40];
         currentLevel = 0;
         panel = new JPanel();
@@ -58,6 +52,7 @@ public class Options
 
     public void openFile(String pFileName)
     { 
+        //Open file based of parameter, use scanner to read lines out of the file and place them into an array of strings in which one line out of the file is a single element in the array. Close file. If doesnt work throw exception and do nothing
         int line = 0;
         try {
             File fileObject = new File(pFileName);
@@ -96,6 +91,7 @@ public class Options
 
     public void setLevel(int pLevel)
     {
+        //Modulus is used because there is only 40 levels, therefore what ever the user tries to input it will be changed so its valid
         currentLevel = pLevel % 40;
         if (currentLevel < 0){
             currentLevel += 40;

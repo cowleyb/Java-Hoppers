@@ -1,18 +1,17 @@
 import javax.swing.*;
 
-
-//import java.awt.*;
-//import java.awt.event.*;
-
 public class Square
 {
+    //State indicates which image is displayed on sqaure
+    //0 = water, 1 = lily, 2 = green frog, 3 = red frog
+    //Selected indicated whether the current sqaure is selected and will highlight it 
     private char state;
     private boolean selected;
-   // private JPanel panel;
     private JButton button;
 
     public Square()
     {
+        //Constructor
         state = '0';
         selected = false;
         button = new JButton();
@@ -20,24 +19,14 @@ public class Square
 
     public Square(char pstate)
     {
+         //Constructor
         state = pstate;
         //x = px;
         //y = py;
         button = new JButton();
         update();
     }
-    /*
 
-    public int getX()
-    {
-        return x;
-    }
-
-    public int getY()
-    {
-        return y;
-    }
-*/
     public int getState()
     {
         return state;
@@ -61,7 +50,7 @@ public class Square
     
     public void update()
     {
-        
+        //Updates image of button based on the state the sqaure is in.        
         if (state == '1'){
             ImageIcon i = new ImageIcon("LilyPad.png");
             button.setIcon(i);
@@ -93,7 +82,10 @@ public class Square
 
     public void moveTo(Square pSquare, Square pMiddleSquare)
     {   
-        //this.state = 1;
+        //Change state of sqaures passed in as parameters.
+        //Set state of sqaure jumping to as the same as this sqaure
+        //Set state of this sqaure to 1
+        //Update sqaures images
         pSquare.setState(state);
         state = '1';
         selected = false;
@@ -106,6 +98,7 @@ public class Square
 
     public boolean validStarter()
     {
+        //returns true if the square has a frog on it
         if (state == '2' || state == '3'){
             return true;
         } else {
@@ -115,6 +108,7 @@ public class Square
 
     public boolean validNext()
     {
+        //returns true if the square is a lily
         if (state == '1'){
             return true;
         } else {
@@ -124,6 +118,7 @@ public class Square
 
     public boolean validMid()
     {
+        //returns true if the sqaure has a green frog on it
         if (state == '2'){
             return true;
         } else {

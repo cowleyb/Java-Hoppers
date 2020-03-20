@@ -1,14 +1,16 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
 
+//did because i thought this would make code cleaner
 public class Squares  
 {
+    //squares is a two dimensional array, each index marks the sqaures position on x and y
     private Square[][] squares;
     private JPanel panel;
 
     public Squares()
     {
+        //Contructor
         panel = new JPanel();
         panel.setLayout(new GridLayout(5,5));
 
@@ -36,11 +38,13 @@ public class Squares
 
     public int[] getMidSquare(int pCurrentSquare[], int pNextSquare[])
     {
+        //Works out middle sqaure using mid point formula
         return new int[]{(pCurrentSquare[0] + pNextSquare[0])/2 , (pCurrentSquare[1] + pNextSquare[1])/2 };
     }
 
-    public boolean validMove(int pCurrentSquare[], int pNextSquare[], int pMiddleSquare[])
+    public boolean validMove(int pCurrentSquare[], int pNextSquare[])
     {
+        //Returns true if the jump is valid horizontal, vertical or diagnol
         int xDiff = Math.abs(pCurrentSquare[0] -pNextSquare[0]);
         int yDiff = Math.abs(pCurrentSquare[1] -pNextSquare[1]);
         
@@ -56,6 +60,7 @@ public class Squares
 
     public void changeLevel(String level)
     {
+        //Loops through all squares changing their state and updating their image
         int k = 0;
         for (int i=0; i<5; i++) {
             for (int j=0; j< 5;j++){
